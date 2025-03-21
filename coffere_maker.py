@@ -49,3 +49,28 @@ def process_notes():
         print("Invalid input. Please enter numeric values only.")
         return 0
 
+
+
+def make_coffee(coffee_name, coffee_ingredients):
+    for item in coffee_ingredients:
+        resources[item] -= coffee_ingredients[item]
+    print(f"Here is your {coffee_name} ☕. Enjoy!")
+
+is_on = True
+while is_on:
+    choice = input("What would you like to have? (latte/espresso/cappuccino): ").lower()
+    if choice == "off":
+        is_on = False
+    elif choice == "report":
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}g")
+        print(f"Money: R{profit}")
+    elif choice in menu:
+        coffee_type = menu[choice]
+        if check_resources(coffee_type["ingredients"]):
+            payment = process_notes()
+            if is_payment_successful(payment, coffee_type["cost"]):
+                make_coffee(choice, coffee_type['ingredients'])
+    else:
+        print("Invalid option. Please choose latte, espresso, or cappuccino.")

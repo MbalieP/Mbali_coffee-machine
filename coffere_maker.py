@@ -49,7 +49,16 @@ def process_notes():
         print("Invalid input. Please enter numeric values only.")
         return 0
 
-
+def is_payment_successful(money_received, coffee_cost):
+    if money_received >= coffee_cost:
+        global profit
+        profit += coffee_cost
+        change = money_received - coffee_cost
+        print(f"Here is your R{change} in change.")
+        return True
+    else:
+        print("Sorry, that's not enough money. Money refunded.")
+        return False
 
 def make_coffee(coffee_name, coffee_ingredients):
     for item in coffee_ingredients:
